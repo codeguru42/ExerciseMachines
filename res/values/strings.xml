@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">Exercise Machines</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="scan">Scan</string>
+    <string name="browse">Browse</string>
+    <string name="search">Search</string>
+    <string name="about">About</string>
 
 </resources>
