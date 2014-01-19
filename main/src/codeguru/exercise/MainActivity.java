@@ -16,6 +16,10 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
     }
     
+    public void onScanClick(View view) {
+        Log.d(TAG, "onScanClick()");
+    }
+    
     public void onBrowseClick(View view) {
     	Log.d(TAG, "onBrowseClick()");
     	Intent intent = new Intent(this, MachineList.class);
