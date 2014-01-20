@@ -30,15 +30,18 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
-        IntentResult scanResult = IntentIntegrator.parseActivityResult(
-                requestCode, resultCode, resultIntent);
-        if (scanResult != null) {
-            Log.d(TAG, "Barcode scanned");
-            Log.d(TAG, scanResult.toString());
-            Intent intent = new Intent(this, MachineDetails.class);
-            // Put extras to indicate which machine to load
-            startActivity(intent);
+    public void onActivityResult(int requestCode, int resultCode,
+            Intent resultIntent) {
+        if (resultCode == RESULT_OK) {
+            IntentResult scanResult = IntentIntegrator.parseActivityResult(
+                    requestCode, resultCode, resultIntent);
+            if (scanResult != null) {
+                Log.d(TAG, "Barcode scanned");
+                Log.d(TAG, scanResult.toString());
+                Intent intent = new Intent(this, MachineDetails.class);
+                // Put extras to indicate which machine to load
+                startActivity(intent);
+            }
         }
     }
 }
