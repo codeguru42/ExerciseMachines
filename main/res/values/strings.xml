@@ -7,4 +7,10 @@
     <string name="search">Search</string>
     <string name="about">About</string>
 
+    <string-array name="tab_titles">
+        <item>Description</item>
+        <item>Pictures</item>
+        <item>Similar Exercises</item>
+    </string-array>
+
 </resources>

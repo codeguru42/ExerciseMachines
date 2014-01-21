@@ -9,8 +9,6 @@ import android.support.v7.app.ActionBarActivity;
 
 public class MachineDetails extends ActionBarActivity implements TabListener {
 
-    private static final int TAB_COUNT = 3;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,10 +17,11 @@ public class MachineDetails extends ActionBarActivity implements TabListener {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        for (int i = 0; i < TAB_COUNT; ++i) {
+        String[] tabTitles = getResources().getStringArray(R.array.tab_titles);
+        for (String tabTitle : tabTitles) {
             ActionBar.Tab tab = actionBar.newTab();
 
-            tab.setText("Tab " + (i + 1));
+            tab.setText(tabTitle);
             tab.setTabListener(this);
             actionBar.addTab(tab);
         }
