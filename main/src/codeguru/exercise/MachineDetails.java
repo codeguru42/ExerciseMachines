@@ -1,13 +1,10 @@
 package codeguru.exercise;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBar.Tab;
-import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarActivity;
 
-public class MachineDetails extends ActionBarActivity implements TabListener {
+public class MachineDetails extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,27 +19,9 @@ public class MachineDetails extends ActionBarActivity implements TabListener {
             ActionBar.Tab tab = actionBar.newTab();
 
             tab.setText(tabTitle);
-            tab.setTabListener(this);
+            tab.setTabListener(new MachineTabListener());
             actionBar.addTab(tab);
         }
-    }
-
-    @Override
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void onTabSelected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-        
     }
 
 }
