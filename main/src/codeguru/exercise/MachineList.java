@@ -1,9 +1,9 @@
 package codeguru.exercise;
 
-import android.app.ListActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 
-public class MachineList extends ListActivity {
+public class MachineList extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

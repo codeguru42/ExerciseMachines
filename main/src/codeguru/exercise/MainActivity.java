@@ -1,14 +1,14 @@
 package codeguru.exercise;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
     private static final String TAG = MainActivity.class.getName();
 
