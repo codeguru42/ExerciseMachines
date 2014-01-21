@@ -6,12 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ImagesFragment extends Fragment {
+public class ExercisesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent,
             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.images, parent, false);
+        return inflater.inflate(R.layout.exercises, parent, false);
     }
-    
+
 }
