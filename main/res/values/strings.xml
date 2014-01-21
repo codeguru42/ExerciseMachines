@@ -8,9 +8,9 @@
     <string name="about">About</string>
 
     <string-array name="tab_titles">
-        <item>Description</item>
-        <item>Pictures</item>
-        <item>Similar Exercises</item>
+        <item >Description</item>
+        <item >Images</item>
+        <item >Similar Exercises</item>
     </string-array>
 
 </resources>
