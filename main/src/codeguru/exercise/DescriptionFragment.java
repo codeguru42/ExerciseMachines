@@ -6,18 +6,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 public class DescriptionFragment extends Fragment {
 
     private static final String TAG = DescriptionFragment.class.getName();
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent,
             Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView()");
         Log.d(TAG, "  parent: " + parent);
-        
-        return inflater.inflate(R.layout.description, parent, false);
-    }
 
+        View view = inflater.inflate(R.layout.description, parent, false);
+        WebView webView = (WebView) view.findViewById(R.id.web_view);
+        webView.loadUrl("file:///android_asset/desc/InclinedBench.html");
+
+        return view;
+    }
 }
