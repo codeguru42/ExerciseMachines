@@ -1,32 +1,19 @@
 package codeguru.exercise;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
-public class ImagePagerAdapter extends FragmentStatePagerAdapter {
+public class ImagePagerAdapter extends PagerAdapter {
 
     private final int[] imageIds = new int[] { R.drawable.ib01,
             R.drawable.ib02, R.drawable.ib03 };
-    private Context context;
+    private final Context context;
 
-    public ImagePagerAdapter(FragmentManager fm, Context context) {
-        super(fm);
-        
+    public ImagePagerAdapter(Context context) {
         this.context = context;
-    }
-
-    @Override
-    public Fragment getItem(int position) {
-        String imageIdKey = context.getString(R.string.image_id);
-        Bundle args = new Bundle();
-        args.putInt(imageIdKey, imageIds[position]);
-
-        Fragment fragment = new ImageFragment();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -34,4 +21,22 @@ public class ImagePagerAdapter extends FragmentStatePagerAdapter {
         return imageIds.length;
     }
 
+    @Override
+    public boolean isViewFromObject(View view, Object obj) {
+        return view == obj;
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        ImageView imageView = new ImageView(context);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        imageView.setImageResource(imageIds[position]);
+        container.addView(imageView, 0);
+        return imageView;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((View) object);
+    }
 }

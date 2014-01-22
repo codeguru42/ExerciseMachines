@@ -10,7 +10,7 @@ public class MachineTabListener implements TabListener {
 
     private static final String TAG = MachineTabListener.class.getName();
 
-    private Fragment fragment;
+    private final Fragment fragment;
 
     public MachineTabListener(Fragment fragment) {
         this.fragment = fragment;
