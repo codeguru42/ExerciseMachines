@@ -18,9 +18,11 @@ public class DescriptionFragment extends Fragment {
         Log.d(TAG, "onCreateView()");
         Log.d(TAG, "  parent: " + parent);
 
+        String descKey = getActivity().getString(R.string.desc_file);
+        String descFile = getArguments().getString(descKey);
         View view = inflater.inflate(R.layout.description, parent, false);
         WebView webView = (WebView) view.findViewById(R.id.web_view);
-        webView.loadUrl("file:///android_asset/desc/InclinedBench.html");
+        webView.loadUrl(descFile);
 
         return view;
     }
