@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.View;
+import android.view.MenuItem;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -28,16 +28,10 @@ public class MachineList extends ActionBarActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void onScanClick(View view) {
+    public void onScanClick(MenuItem menuItem) {
         Log.d(TAG, "onScanClick()");
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.initiateScan();
-    }
-
-    public void onBrowseClick(View view) {
-        Log.d(TAG, "onBrowseClick()");
-        Intent intent = new Intent(this, MachineList.class);
-        startActivity(intent);
     }
 
     @Override
