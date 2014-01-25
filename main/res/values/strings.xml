@@ -12,5 +12,6 @@
         <item >Images</item>
         <item >Similar Exercises</item>
     </string-array>
+    <string name="invalid_uri_error">Invalid URI: %1$s</string>
 
 </resources>
