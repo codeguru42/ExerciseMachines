@@ -14,6 +14,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import codeguru.exercise.provider.MachineContract;
@@ -29,6 +32,17 @@ public class MachineList extends ActionBarActivity implements
             MachineContract.ID_COL, MachineContract.MACHINE_NAME };
 
     private CursorAdapter adapter;
+
+    private final OnItemClickListener onMachineClick = new OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position,
+                long id) {
+            Intent intent = new Intent(MachineList.this, MachineDetails.class);
+            startActivity(intent);
+        }
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +63,7 @@ public class MachineList extends ActionBarActivity implements
                 android.R.layout.simple_list_item_1, null, fromColumns,
                 toViews, 0);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(onMachineClick);
 
         getSupportLoaderManager().initLoader(0, null, this);
     }
