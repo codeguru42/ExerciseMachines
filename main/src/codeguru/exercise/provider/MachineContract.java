@@ -24,6 +24,12 @@ public class MachineContract {
 
     public static final String ID_COL = "_id";
 
+    public static final String MACHINE_NAME = "name";
+
+    public static final String MACHINE_DESC = "description";
+
+    public static final String MACHINE_THUMB = "thumbnail";
+
     private MachineContract() {
     }
 

@@ -9,9 +9,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import codeguru.exercise.R;
 
 public class MachineProvider extends ContentProvider {
+
+    private static final String TAG = MachineProvider.class.getName();
 
     private static final int ALL_MACHINES = 1;
     private static final int MACHINE_ID = 2;
@@ -56,6 +59,8 @@ public class MachineProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
+        Log.d(TAG, "onCreate()");
+
         dbHelper = new MachineDbHelper(getContext());
         return true;
     }
@@ -63,6 +68,8 @@ public class MachineProvider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
             String[] selectionArgs, String sortOrder) {
+        Log.d(TAG, "query()");
+
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         switch (uriMatcher.match(uri)) {

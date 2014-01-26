@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="authorities">codeguru.exercise.provider</string>
+    <string name="read_permission">codeguru.exercise.permission.READ</string>
+    
+</resources>

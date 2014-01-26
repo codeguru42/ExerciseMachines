@@ -1,9 +1,9 @@
 package codeguru.exercise.provider;
 
 import android.content.Context;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.TextUtils;
 import android.util.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +13,7 @@ public class MachineDbHelper extends SQLiteOpenHelper {
 
     private static final String TAG = MachineDbHelper.class.getName();
 
-    private static final String SQL_CREATE_FILE = "sql_create.sql";
+    private static final String SQL_CREATE_FILE = "create.sql";
 
     private final Context context;
 
@@ -26,14 +26,18 @@ public class MachineDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d(TAG, "onCreate()");
+
         BufferedReader in = null;
+        StringBuffer sb = new StringBuffer();
+
         try {
             in = new BufferedReader(new InputStreamReader(context.getAssets()
                     .open(SQL_CREATE_FILE)));
-            String sqlCreate = in.readLine();
-            DatabaseUtils.createDbFromSqlStatements(context,
-                    MachineContract.DB_NAME, MachineContract.SCHEMA_VERSION,
-                    sqlCreate);
+
+            while (in.ready()) {
+                sb.append(in.readLine());
+            }
         } catch (IOException ex) {
             Log.e(TAG, ex.getMessage(), ex);
         } finally {
@@ -43,6 +47,14 @@ public class MachineDbHelper extends SQLiteOpenHelper {
                 } catch (IOException ex) {
                     Log.e(TAG, ex.getMessage(), ex);
                 }
+            }
+        }
+
+        String[] sqls = sb.toString().split(";");
+
+        for (String sql : sqls) {
+            if (!TextUtils.isEmpty(sql.trim())) {
+                db.execSQL(sql);
             }
         }
     }

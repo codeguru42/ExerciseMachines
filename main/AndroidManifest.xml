@@ -29,6 +29,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="codeguru.exercise.MachineList" />
         </activity>
+        <provider android:name=".provider.MachineProvider"
+                  android:label="@string/provider_name"
+                  android:icon="@drawable/ic_launcher"
+                  android:authorities="@string/authorities"
+                  android:readPermission="@string/read_permission"
+        />
     </application>
 
 </manifest>
