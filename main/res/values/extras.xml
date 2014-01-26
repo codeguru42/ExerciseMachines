@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="machine_id">machineId</string>
+    <string name="machine_name">machineName</string>
+    <string name="machine_desc">DescriptionFile</string>
     <string name="image_id">imageId</string>
-    <string name="desc_file">DescriptionFile</string>
-    
+
 </resources>

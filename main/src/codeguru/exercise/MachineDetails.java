@@ -15,6 +15,11 @@ public class MachineDetails extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
+        Bundle args = getIntent().getExtras();
+        String nameKey = getString(R.string.machine_name);
+        String machineName = args.getString(nameKey);
+        setTitle(machineName);
+
         String[] tabTitles = getResources().getStringArray(R.array.tab_titles);
 
         Fragment[] fragments = new Fragment[tabTitles.length];
@@ -22,17 +27,13 @@ public class MachineDetails extends ActionBarActivity {
         fragments[1] = new ImagesFragment();
         fragments[2] = new ExercisesFragment();
 
-        Bundle descArgs = new Bundle();
-        String descKey = getString(R.string.desc_file);
-        descArgs.putString(descKey,
-                "file:///android_asset/desc/InclinedBench.html");
-        fragments[0].setArguments(descArgs);
-
         for (int i = 0; i < tabTitles.length; ++i) {
             ActionBar.Tab tab = actionBar.newTab();
             tab.setText(tabTitles[i]);
             tab.setTabListener(new MachineTabListener(fragments[i]));
             actionBar.addTab(tab);
+
+            fragments[i].setArguments(args);
         }
     }
 

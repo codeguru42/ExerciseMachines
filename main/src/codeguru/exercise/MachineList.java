@@ -28,8 +28,7 @@ public class MachineList extends ActionBarActivity implements
 
     private static String TAG = MachineList.class.getName();
 
-    private static final String[] PROJECTION = new String[] {
-            MachineContract.ID_COL, MachineContract.MACHINE_NAME };
+    private static int LIST_LOADER = 0;
 
     private CursorAdapter adapter;
 
@@ -39,6 +38,19 @@ public class MachineList extends ActionBarActivity implements
         public void onItemClick(AdapterView<?> parent, View view, int position,
                 long id) {
             Intent intent = new Intent(MachineList.this, MachineDetails.class);
+            String idKey = getString(R.string.machine_id);
+            String nameKey = getString(R.string.machine_name);
+            String descKey = getString(R.string.machine_desc);
+
+            Cursor c = adapter.getCursor();
+            String machineName = c.getString(c
+                    .getColumnIndex(MachineContract.MACHINE_NAME));
+            String machineDesc = c.getString(c
+                    .getColumnIndex(MachineContract.MACHINE_DESC));
+
+            intent.putExtra(idKey, id);
+            intent.putExtra(nameKey, machineName);
+            intent.putExtra(descKey, machineDesc);
             startActivity(intent);
         }
 
@@ -65,7 +77,7 @@ public class MachineList extends ActionBarActivity implements
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(onMachineClick);
 
-        getSupportLoaderManager().initLoader(0, null, this);
+        getSupportLoaderManager().initLoader(LIST_LOADER, null, this);
     }
 
     @Override
@@ -101,8 +113,8 @@ public class MachineList extends ActionBarActivity implements
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.d(TAG, "onCreateLoader()");
-        return new CursorLoader(this, MachineContract.MACHINES_URI, PROJECTION,
-                null, null, null);
+        return new CursorLoader(this, MachineContract.MACHINES_URI,
+                MachineContract.MACHINE_PROJECTION, null, null, null);
     }
 
     @Override

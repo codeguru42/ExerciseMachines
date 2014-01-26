@@ -30,6 +30,11 @@ public class MachineContract {
 
     public static final String MACHINE_THUMB = "thumbnail";
 
+    public static final String MACHINE_QR_CODE = "qr_code";
+
+    public static final String[] MACHINE_PROJECTION = new String[] { ID_COL,
+            MACHINE_NAME, MACHINE_DESC, MACHINE_THUMB, MACHINE_QR_CODE };
+
     private MachineContract() {
     }
 
