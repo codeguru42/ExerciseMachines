@@ -18,6 +18,7 @@ public class MachineProvider extends ContentProvider {
 
     private static final int ALL_MACHINES = 1;
     private static final int MACHINE_ID = 2;
+    private static final int ALL_IMAGES = 3;
 
     private static final UriMatcher uriMatcher = new UriMatcher(
             UriMatcher.NO_MATCH);
@@ -27,6 +28,8 @@ public class MachineProvider extends ContentProvider {
                 MachineContract.MACHINES_TABLE, ALL_MACHINES);
         uriMatcher.addURI(MachineContract.AUTHORITY,
                 MachineContract.MACHINES_TABLE + "/#", MACHINE_ID);
+        uriMatcher.addURI(MachineContract.AUTHORITY,
+                MachineContract.IMAGES_TABLE, ALL_IMAGES);
     }
 
     private SQLiteOpenHelper dbHelper;
@@ -44,6 +47,9 @@ public class MachineProvider extends ContentProvider {
 
             case MACHINE_ID:
                 return MachineContract.MACHINE_ITEM_MIME_TYPE;
+
+            case ALL_IMAGES:
+                return MachineContract.IMAGE_LIST_MIME_TYPE;
 
             default:
                 String error = this.getContext().getString(
@@ -83,6 +89,10 @@ public class MachineProvider extends ContentProvider {
                 String[] whereArgs = this.getWhereArgsWithId(selectionArgs, id);
                 return db.query(MachineContract.MACHINES_TABLE, projection,
                         where, whereArgs, null, null, sortOrder);
+
+            case ALL_IMAGES:
+                return db.query(MachineContract.IMAGES_TABLE, projection,
+                        selection, selectionArgs, null, null, sortOrder);
 
             default:
                 String error = this.getContext().getString(

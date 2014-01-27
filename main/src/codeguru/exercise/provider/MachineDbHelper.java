@@ -53,6 +53,7 @@ public class MachineDbHelper extends SQLiteOpenHelper {
         String[] sqls = sb.toString().split(";");
 
         for (String sql : sqls) {
+            Log.d(TAG, sql);
             if (!TextUtils.isEmpty(sql.trim())) {
                 db.execSQL(sql);
             }
