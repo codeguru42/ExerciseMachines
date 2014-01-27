@@ -10,13 +10,13 @@ INSERT INTO machines (_id, name, description, thumbnail)
 VALUES ( 1
        , "Inclined Bench Press"
        , "file:///android_asset/desc/InclinedBench.html"
-       , "file:///android_asset/img/InclinedBenchThumb.jpeg"
+       , "img/InclinedBenchThumb.jpeg"
        );
 INSERT INTO machines (_id, name, description, thumbnail)
 VALUES ( 2
        , "Seated Row"
        , "file:///android_asset/desc/SeatedRow.html"
-       , "file:///android_asset/img/SeatedRowThumb.jpeg"
+       , "img/SeatedRowThumb.jpeg"
        );
 COMMIT;
 
