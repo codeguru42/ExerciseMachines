@@ -10,13 +10,13 @@ INSERT INTO machines (_id, name, description, thumbnail)
 VALUES ( 1
        , "Inclined Bench Press"
        , "file:///android_asset/desc/InclinedBench.html"
-       , "file:///android_asset/img/InclinedBenchThumb.png"
+       , "file:///android_asset/img/InclinedBenchThumb.jpeg"
        );
 INSERT INTO machines (_id, name, description, thumbnail)
 VALUES ( 2
        , "Seated Row"
        , "file:///android_asset/desc/SeatedRow.html"
-       , "file:///android_asset/img/SeatedRowThumb.png"
+       , "file:///android_asset/img/SeatedRowThumb.jpeg"
        );
 COMMIT;
 
@@ -27,13 +27,13 @@ CREATE TABLE images
 );
 BEGIN TRANSACTION;
 INSERT INTO images (machine_id, image_uri)
-VALUES ( 1, "img/InclinedBench01.png" );
+VALUES ( 1, "img/InclinedBench01.jpeg" );
 INSERT INTO images (machine_id, image_uri)
-VALUES ( 1, "img/InclinedBench02.png" );
+VALUES ( 1, "img/InclinedBench02.jpeg" );
 INSERT INTO images (machine_id, image_uri)
-VALUES ( 1, "img/InclinedBench03.png" );
+VALUES ( 1, "img/InclinedBench03.jpeg" );
 INSERT INTO images (machine_id, image_uri)
-VALUES ( 2, "img/SeatedRow01.png" );
+VALUES ( 2, "img/SeatedRow01.jpeg" );
 INSERT INTO images (machine_id, image_uri)
-VALUES ( 2, "img/SeatedRow02.png" );
+VALUES ( 2, "img/SeatedRow02.jpeg" );
 COMMIT;
