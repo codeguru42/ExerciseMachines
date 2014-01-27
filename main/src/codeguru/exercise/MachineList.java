@@ -14,9 +14,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import codeguru.exercise.provider.MachineContract;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -64,7 +64,7 @@ public class MachineList extends ActionBarActivity implements
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         ProgressBar progressBar = (ProgressBar) findViewById(android.R.id.empty);
-        ListView listView = (ListView) findViewById(android.R.id.list);
+        AbsListView listView = (AbsListView) findViewById(android.R.id.list);
         listView.setEmptyView(progressBar);
 
         String[] fromColumns = { MachineContract.MACHINE_NAME };
