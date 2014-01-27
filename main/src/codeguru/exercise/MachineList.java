@@ -68,10 +68,9 @@ public class MachineList extends ActionBarActivity implements
         listView.setEmptyView(progressBar);
 
         String[] fromColumns = { MachineContract.MACHINE_NAME };
-        int[] toViews = { android.R.id.text1 };
+        int[] toViews = { R.id.machine_text };
 
-        adapter = new MachineListAdapter(this,
-                android.R.layout.simple_list_item_1, null, fromColumns,
+        adapter = new MachineListAdapter(this, R.layout.row, null, fromColumns,
                 toViews, 0);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(onMachineClick);

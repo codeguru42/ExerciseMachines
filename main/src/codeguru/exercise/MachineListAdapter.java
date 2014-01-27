@@ -8,7 +8,7 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 import codeguru.exercise.provider.MachineContract;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,10 +46,9 @@ public class MachineListAdapter extends SimpleCursorAdapter {
 
             Log.d(TAG, "  thumbnail=" + thumbnail);
 
-            TextView machineText = (TextView) v
-                    .findViewById(android.R.id.text1);
-            machineText.setCompoundDrawablesWithIntrinsicBounds(thumbnail,
-                    null, null, null);
+            ImageView machineThumb = (ImageView) v
+                    .findViewById(R.id.machine_thumb);
+            machineThumb.setImageDrawable(thumbnail);
 
         } catch (IOException e) {
             Log.e(TAG, "Unable to load image: " + thumbPath, e);
