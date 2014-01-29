@@ -18,6 +18,12 @@ VALUES ( 2
        , "file:///android_asset/desc/SeatedRow.html"
        , "img/SeatedRowThumb.jpeg"
        );
+INSERT INTO machines (_id, name, description, thumbnail)
+VALUES ( 3
+       , "Seated Tricep Extension"
+       , "file:///android_asset/desc/SeatedTricepExtension.html"
+       , "img/TricepExtensionThumb.jpeg"
+       );
 COMMIT;
 
 CREATE TABLE images
@@ -36,4 +42,8 @@ INSERT INTO images (machine_id, image_uri)
 VALUES ( 2, "img/SeatedRow01.jpeg" );
 INSERT INTO images (machine_id, image_uri)
 VALUES ( 2, "img/SeatedRow02.jpeg" );
+INSERT INTO images (machine_id, image_uri)
+VALUES ( 3, "img/TricepExtension01.jpeg" );
+INSERT INTO images (machine_id, image_uri)
+VALUES ( 3, "img/TricepExtension02.jpeg" );
 COMMIT;
