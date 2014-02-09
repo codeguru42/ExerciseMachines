@@ -40,17 +40,26 @@ public class MachineContract {
 
     public static final String MACHINE_QR_CODE = "qr_code";
 
+    public static final String MACHINE_CATEGORY = "category";
+
     public static final String MACHINE_ID = "machine_id";
 
     public static final String IMAGE_URI = "image_uri";
 
     public static final String[] MACHINE_PROJECTION = new String[] { ID_COL,
-            MACHINE_NAME, MACHINE_DESC, MACHINE_THUMB, MACHINE_QR_CODE };
+            MACHINE_NAME, MACHINE_DESC, MACHINE_THUMB, MACHINE_QR_CODE,
+            MACHINE_CATEGORY };
 
     public static final String[] IMAGES_PROJECTION = new String[] { ID_COL,
             MACHINE_ID, IMAGE_URI };
 
-    public static final String MACHINE_ID_SELECTION = "machine_id = ?";
+    private static final String INTEGER_SELECTION = "%1$s = ?";
+
+    public static final String MACHINE_ID_SELECTION = String.format(
+            INTEGER_SELECTION, MACHINE_ID);
+
+    public static final String CATEGORY_SELECTION = String.format(
+            INTEGER_SELECTION, MACHINE_CATEGORY);
 
     private MachineContract() {
     }

@@ -25,7 +25,7 @@ public class MachineDetails extends ActionBarActivity {
         Fragment[] fragments = new Fragment[tabTitles.length];
         fragments[0] = new DescriptionFragment();
         fragments[1] = new ImagesFragment();
-        fragments[2] = new ExercisesFragment();
+        fragments[2] = new MachineList();
 
         for (int i = 0; i < tabTitles.length; ++i) {
             ActionBar.Tab tab = actionBar.newTab();

@@ -39,16 +39,20 @@ public class MachineList extends Fragment implements
             String idKey = getString(R.string.machine_id);
             String nameKey = getString(R.string.machine_name);
             String descKey = getString(R.string.machine_desc);
+            String categoryKey = getString(R.string.category_id);
 
             Cursor c = adapter.getCursor();
             String machineName = c.getString(c
                     .getColumnIndex(MachineContract.MACHINE_NAME));
             String machineDesc = c.getString(c
                     .getColumnIndex(MachineContract.MACHINE_DESC));
+            int machineCategory = c.getInt(c
+                    .getColumnIndex(MachineContract.MACHINE_CATEGORY));
 
             intent.putExtra(idKey, id);
             intent.putExtra(nameKey, machineName);
             intent.putExtra(descKey, machineDesc);
+            intent.putExtra(categoryKey, machineCategory);
             startActivity(intent);
         }
 
@@ -73,8 +77,8 @@ public class MachineList extends Fragment implements
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(onMachineClick);
 
-        getActivity().getSupportLoaderManager().initLoader(LIST_LOADER, null,
-                this);
+        getActivity().getSupportLoaderManager().initLoader(LIST_LOADER,
+                getArguments(), this);
 
         return view;
     }
@@ -98,8 +102,23 @@ public class MachineList extends Fragment implements
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.d(TAG, "onCreateLoader()");
+
+        String selection = null;
+        String[] selectionArgs = null;
+
+        if (args != null) {
+            String categoryKey = getString(R.string.category_id);
+            int categoryId = getArguments().getInt(categoryKey);
+
+            if (categoryId != 0) {
+                selection = MachineContract.CATEGORY_SELECTION;
+                selectionArgs = new String[] { Integer.toString(categoryId) };
+            }
+        }
+
         return new CursorLoader(getActivity(), MachineContract.MACHINES_URI,
-                MachineContract.MACHINE_PROJECTION, null, null, null);
+                MachineContract.MACHINE_PROJECTION, selection, selectionArgs,
+                null);
     }
 
     @Override
