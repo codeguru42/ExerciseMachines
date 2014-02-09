@@ -42,6 +42,12 @@ VALUES ( 6
        , "file:///android_asset/desc/HackSquat.html"
        , "img/HackSquatThumb.jpeg"
        );
+INSERT INTO machines (_id, name, description, thumbnail)
+VALUES ( 7
+       , "Leg Curl"
+       , "file:///android_asset/desc/LegCurl.html"
+       , "img/LegCurlThumb.jpeg"
+       );
 COMMIT;
 
 CREATE TABLE images
@@ -76,4 +82,8 @@ INSERT INTO images (machine_id, image_uri)
 VALUES ( 6, "img/HackSquat01.jpeg" );
 INSERT INTO images (machine_id, image_uri)
 VALUES ( 6, "img/HackSquat02.jpeg" );
+INSERT INTO images (machine_id, image_uri)
+VALUES ( 7, "img/LegCurl01.jpeg" );
+INSERT INTO images (machine_id, image_uri)
+VALUES ( 7, "img/LegCurl02.jpeg" );
 COMMIT;
