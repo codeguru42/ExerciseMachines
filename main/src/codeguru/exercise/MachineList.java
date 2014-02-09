@@ -1,19 +1,18 @@
 package codeguru.exercise;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -22,7 +21,7 @@ import codeguru.exercise.provider.MachineContract;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class MachineList extends ActionBarActivity implements
+public class MachineList extends Fragment implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
     private static String TAG = MachineList.class.getName();
@@ -36,7 +35,7 @@ public class MachineList extends ActionBarActivity implements
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                 long id) {
-            Intent intent = new Intent(MachineList.this, MachineDetails.class);
+            Intent intent = new Intent(getActivity(), MachineDetails.class);
             String idKey = getString(R.string.machine_id);
             String nameKey = getString(R.string.machine_name);
             String descKey = getString(R.string.machine_desc);
@@ -56,52 +55,40 @@ public class MachineList extends ActionBarActivity implements
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.machine_list);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.machine_list, container, false);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
-        ProgressBar progressBar = (ProgressBar) findViewById(android.R.id.empty);
-        AbsListView listView = (AbsListView) findViewById(android.R.id.list);
+        ProgressBar progressBar = (ProgressBar) view
+                .findViewById(android.R.id.empty);
+        AbsListView listView = (AbsListView) view
+                .findViewById(android.R.id.list);
         listView.setEmptyView(progressBar);
 
         String[] fromColumns = { MachineContract.MACHINE_NAME };
         int[] toViews = { R.id.machine_text };
 
-        adapter = new MachineListAdapter(this, R.layout.row, null, fromColumns,
-                toViews, 0);
+        adapter = new MachineListAdapter(getActivity(), R.layout.row, null,
+                fromColumns, toViews, 0);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(onMachineClick);
 
-        getSupportLoaderManager().initLoader(LIST_LOADER, null, this);
-    }
+        getActivity().getSupportLoaderManager().initLoader(LIST_LOADER, null,
+                this);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.list_actions, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    public void onScanClick(MenuItem menuItem) {
-        Log.d(TAG, "onScanClick()");
-        IntentIntegrator integrator = new IntentIntegrator(this);
-        integrator.initiateScan();
+        return view;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode,
             Intent resultIntent) {
-        if (resultCode == RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK) {
             IntentResult scanResult = IntentIntegrator.parseActivityResult(
                     requestCode, resultCode, resultIntent);
             if (scanResult != null) {
                 Log.d(TAG, "Barcode scanned");
                 Log.d(TAG, scanResult.toString());
-                Intent intent = new Intent(this, MachineDetails.class);
+                Intent intent = new Intent(getActivity(), MachineDetails.class);
                 // Put extras to indicate which machine to load
                 startActivity(intent);
             }
@@ -111,7 +98,7 @@ public class MachineList extends ActionBarActivity implements
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.d(TAG, "onCreateLoader()");
-        return new CursorLoader(this, MachineContract.MACHINES_URI,
+        return new CursorLoader(getActivity(), MachineContract.MACHINES_URI,
                 MachineContract.MACHINE_PROJECTION, null, null, null);
     }
 
