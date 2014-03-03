@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import codeguru.machinelib.FragmentTabListener;
 
 public class MachineDetails extends ActionBarActivity {
 
@@ -30,7 +31,8 @@ public class MachineDetails extends ActionBarActivity {
         for (int i = 0; i < tabTitles.length; ++i) {
             ActionBar.Tab tab = actionBar.newTab();
             tab.setText(tabTitles[i]);
-            tab.setTabListener(new MachineTabListener(fragments[i]));
+            tab.setTabListener(new FragmentTabListener(fragments[i],
+                    R.id.fragment_container));
             actionBar.addTab(tab);
 
             fragments[i].setArguments(args);

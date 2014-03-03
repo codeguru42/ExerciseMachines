@@ -1,4 +1,4 @@
-package codeguru.exercise;
+package codeguru.machinelib;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -6,14 +6,17 @@ import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
 import android.util.Log;
 
-public class MachineTabListener implements TabListener {
+public class FragmentTabListener implements TabListener {
 
-    private static final String TAG = MachineTabListener.class.getName();
+    private static final String TAG = FragmentTabListener.class.getName();
 
-    private final Fragment fragment;
+    private final Fragment mFragment;
 
-    public MachineTabListener(Fragment fragment) {
-        this.fragment = fragment;
+    private final int mFragmentContainer;
+
+    public FragmentTabListener(Fragment fragment, int fragmentContainer) {
+        mFragment = fragment;
+        mFragmentContainer = fragmentContainer;
     }
 
     @Override
@@ -24,12 +27,12 @@ public class MachineTabListener implements TabListener {
     @Override
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
         Log.d(TAG, "Tab selected: " + tab.getText());
-        ft.replace(R.id.fragment_container, fragment);
+        ft.replace(mFragmentContainer, mFragment);
     }
 
     @Override
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        ft.remove(fragment);
+        ft.remove(mFragment);
     }
 
 }
