@@ -1,15 +1,9 @@
 package codeguru.machineadmin;
 
 import android.app.Activity;
-import android.app.LoaderManager;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,25 +11,20 @@ import android.view.View;
 import android.widget.Toast;
 import com.loopj.android.image.SmartImageView;
 
-public class MainActivity extends Activity implements
-        LoaderManager.LoaderCallbacks<Cursor> {
+public class MainActivity extends Activity {
 
     private static final String TAG = MainActivity.class.getName();
 
-    private static final int SELECT_PICTURE = 1;
+    public static final int SELECT_PICTURE = 1;
 
-    private static final int IMAGE_URL_LOADER = 0;
-
-    private Uri mImageUri;
-
-    private SmartImageView thumbnail;
+    private SmartImageView mThumbnail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        thumbnail = (SmartImageView) findViewById(R.id.thumbnail);
+        mThumbnail = (SmartImageView) findViewById(R.id.thumbnail);
     }
 
     @Override
@@ -61,47 +50,11 @@ public class MainActivity extends Activity implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
-                mImageUri = data.getData();
-
-                Log.d(TAG, mImageUri.toString());
-
-                getLoaderManager().initLoader(IMAGE_URL_LOADER, null, this);
+                Uri imageUri = data.getData();
+                getLoaderManager().initLoader(ImageLoader.IMAGE_URL_LOADER,
+                        null, new ImageLoader(this, mThumbnail, imageUri));
             }
         }
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        switch (id) {
-            case IMAGE_URL_LOADER:
-                String[] projection = { MediaStore.Images.Media.DATA };
-                return new CursorLoader(this, mImageUri, projection, null,
-                        null, null);
-
-            default:
-                Log.e(TAG, "Invalid Loader ID: " + id);
-                return null;
-        }
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        String imagePath = mImageUri.getPath();
-
-        if (data != null) {
-            int columnIndex = data
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            data.moveToFirst();
-            imagePath = data.getString(columnIndex);
-        }
-
-        Log.d(TAG, imagePath);
-
-        thumbnail.setImageUrl("file:///" + imagePath);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        // Do nothing
-    }
 }
