@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -22,7 +24,11 @@ public class MainActivity extends Activity {
     }
 
     public void onSave(MenuItem item) {
+        Toast.makeText(this, "Saving...not really", Toast.LENGTH_LONG).show();
+    }
 
+    public void onGetImage(View view) {
+        Toast.makeText(this, "Image clicked", Toast.LENGTH_LONG).show();
     }
 
 }

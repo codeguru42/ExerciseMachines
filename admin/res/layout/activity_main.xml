@@ -57,6 +57,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:contentDescription="@string/select_thumbnail"
-        android:src="@drawable/tap_here" />
+        android:src="@drawable/tap_here"
+        android:onClick="onGetImage" />
 
 </LinearLayout>
