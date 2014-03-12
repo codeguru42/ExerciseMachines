@@ -48,6 +48,10 @@ public class MainActivity extends ActionBarActivity {
         Toast.makeText(this, "Saving...not really", Toast.LENGTH_LONG).show();
     }
 
+    public void onAddCategory(MenuItem item) {
+        Toast.makeText(this, "Add category...", Toast.LENGTH_LONG).show();
+    }
+
     public void onGetImage(View view) {
         Intent intent = new Intent();
         intent.setType("image/*");
