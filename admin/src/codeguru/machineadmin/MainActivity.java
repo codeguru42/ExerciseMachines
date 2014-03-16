@@ -49,7 +49,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onAddCategory(MenuItem item) {
-        Toast.makeText(this, "Add category...", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, CategoryActivity.class);
+        startActivity(intent);
     }
 
     public void onGetImage(View view) {
