@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">MachineAdmin</string>
-    <string name="name">Machine Name:</string>
+    <string name="machine_name">Machine Name:</string>
     <string name="category">Category:</string>
     <string name="tips">Tips:</string>
     <string name="thumbnail">Thumbnail:</string>
@@ -10,6 +10,7 @@
     <string name="save">Save</string>
     <string name="add">Add Category</string>
     <string name="details">Details</string>
+    <string name="category_name">Category Name:</string>
 	<string name="muscles">Muscles:</string>
     
 </resources>
