@@ -1,7 +1,7 @@
 package codeguru.machineadmin;
 
-import android.app.Activity;
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -17,14 +17,14 @@ public class ImageLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final int IMAGE_URL_LOADER = 0;
 
-    private final Activity mActivity;
+    private final Context mContext;
 
     private final SmartImageView mImageView;
 
     private final Uri mImageUri;
 
-    public ImageLoader(Activity activity, SmartImageView imageView, Uri imageUri) {
-        mActivity = activity;
+    public ImageLoader(Context context, SmartImageView imageView, Uri imageUri) {
+        mContext = context;
         mImageView = imageView;
         mImageUri = imageUri;
     }
@@ -34,7 +34,7 @@ public class ImageLoader implements LoaderManager.LoaderCallbacks<Cursor> {
         switch (id) {
             case IMAGE_URL_LOADER:
                 String[] projection = { MediaStore.Images.Media.DATA };
-                return new CursorLoader(this.mActivity, mImageUri, projection,
+                return new CursorLoader(this.mContext, mImageUri, projection,
                         null, null, null);
 
             default:
