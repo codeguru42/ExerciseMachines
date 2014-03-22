@@ -11,6 +11,10 @@
     <string name="add">Add Category</string>
     <string name="details">Details</string>
     <string name="category_name">Category Name:</string>
-	<string name="muscles">Muscles:</string>
-    
+    <string name="muscles">Muscles:</string>
+    <string name="name_error">Enter name.</string>
+    <string name="muscles_error">Enter muscles list.</string>
+    <string name="machine_saved">Machine saved.</string>
+    <string name="category_saved">Category saved.</string>
+
 </resources>

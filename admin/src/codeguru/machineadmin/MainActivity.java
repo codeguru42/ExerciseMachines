@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import codeguru.machinelib.FragmentTabListener;
+import com.parse.Parse;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -35,6 +36,9 @@ public class MainActivity extends ActionBarActivity {
         detailsTab.setTabListener(new FragmentTabListener(mDetailsFragment,
                 R.id.frame));
         actionBar.addTab(detailsTab);
+
+        Parse.initialize(this, "6eINSAhUl3T55fMTGaOG7XdIj0KvORFN4b3PPADw",
+                "WQuU2hGwbuAapiJJuyEIpX2bg086liWCzpvFREZS");
     }
 
     @Override
