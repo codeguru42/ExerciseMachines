@@ -102,14 +102,14 @@ public class DetailsFragment extends Fragment {
             good = false;
         }
 
-        ParseObject category = (ParseObject) mCategorySpinner.getSelectedItem();
+        Category category = (Category) mCategorySpinner.getSelectedItem();
 
         Log.d(TAG, "good=" + good);
         if (good) {
-            ParseObject machine = new ParseObject("Machine");
-            machine.put("name", name);
-            machine.put("tips", tips);
-            machine.put("category", category);
+            Machine machine = new Machine();
+            machine.setName(name);
+            machine.setTips(tips);
+            machine.setCategory(category);
             machine.saveInBackground();
 
             mNameText.setText("");

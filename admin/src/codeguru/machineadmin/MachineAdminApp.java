@@ -15,6 +15,7 @@ public class MachineAdminApp extends Application {
         super.onCreate();
 
         ParseObject.registerSubclass(Category.class);
+        ParseObject.registerSubclass(Machine.class);
         Parse.initialize(this, PARSE_APPLICATION_ID, PARSE_CLIENT_KEY);
     }
 
