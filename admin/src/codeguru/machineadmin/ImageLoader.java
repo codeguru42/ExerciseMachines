@@ -31,20 +31,17 @@ public class ImageLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        switch (id) {
-            case IMAGE_URL_LOADER:
-                String[] projection = { MediaStore.Images.Media.DATA };
-                return new CursorLoader(this.mContext, mImageUri, projection,
-                        null, null, null);
+        Log.d(TAG, "onCreateLoader()");
 
-            default:
-                Log.e(TAG, "Invalid Loader ID: " + id);
-                return null;
-        }
+        String[] projection = { MediaStore.Images.Media.DATA };
+        return new CursorLoader(this.mContext, mImageUri, projection, null,
+                null, null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        Log.d(TAG, "onLoadFinished()");
+
         String imagePath = mImageUri.getPath();
 
         if (data != null) {
@@ -62,6 +59,7 @@ public class ImageLoader implements LoaderManager.LoaderCallbacks<Cursor> {
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         // Do nothing
+        Log.d(TAG, "onLoaderReset()");
     }
 
 }

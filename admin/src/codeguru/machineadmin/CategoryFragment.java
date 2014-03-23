@@ -11,26 +11,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 import com.loopj.android.image.SmartImageView;
 import com.parse.Parse;
-import com.parse.ParseObject;
-import com.parse.ParseQueryAdapter;
 
-public class DetailsFragment extends Fragment {
+public class CategoryFragment extends Fragment {
 
-    private static final String TAG = DetailsFragment.class.getName();
+    private static final String TAG = CategoryFragment.class.getName();
 
-    private EditText mNameText;
-
-    private Spinner mCategorySpinner;
-
-    private EditText mTipsText;
+    private static final int SELECT_PICTURE = 1;
 
     private SmartImageView mThumbnail;
 
-    private ParseQueryAdapter<ParseObject> mAdapter;
+    private EditText mMusclesText;
+
+    private EditText mNameText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,23 +39,17 @@ public class DetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.details, null);
+        View view = inflater.inflate(R.layout.category, null);
 
         mNameText = (EditText) view.findViewById(R.id.name);
-        mCategorySpinner = (Spinner) view.findViewById(R.id.category);
-        mTipsText = (EditText) view.findViewById(R.id.tips);
+        mMusclesText = (EditText) view.findViewById(R.id.muscles);
         mThumbnail = (SmartImageView) view.findViewById(R.id.thumbnail);
-
-        mAdapter = new ParseQueryAdapter<ParseObject>(getActivity(), "Category");
-        mAdapter.setTextKey("name");
-        mCategorySpinner.setAdapter(mAdapter);
 
         return view;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.main, menu);
     }
 
@@ -76,12 +65,12 @@ public class DetailsFragment extends Fragment {
         }
     }
 
-    private void onSave() {
+    public void onSave() {
         boolean good = true;
-        String tips = mTipsText.getText().toString();
-        if (TextUtils.isEmpty(tips)) {
-            mTipsText.setError(getString(R.string.muscles_error));
-            mTipsText.requestFocus();
+        String muscles = mMusclesText.getText().toString();
+        if (TextUtils.isEmpty(muscles)) {
+            mMusclesText.setError(getString(R.string.muscles_error));
+            mMusclesText.requestFocus();
             good = false;
         }
 
@@ -92,18 +81,15 @@ public class DetailsFragment extends Fragment {
             good = false;
         }
 
-        Category category = (Category) mCategorySpinner.getSelectedItem();
-
         Log.d(TAG, "good=" + good);
         if (good) {
-            Machine machine = new Machine();
-            machine.setName(name);
-            machine.setTips(tips);
-            machine.setCategory(category);
-            machine.saveInBackground();
+            Category category = new Category();
+            category.setName(name);
+            category.setMuscles(muscles);
+            category.saveInBackground();
 
             mNameText.setText("");
-            mTipsText.setText("");
+            mMusclesText.setText("");
             mNameText.requestFocus();
             Toast.makeText(getActivity(), getString(R.string.category_saved),
                     Toast.LENGTH_LONG).show();

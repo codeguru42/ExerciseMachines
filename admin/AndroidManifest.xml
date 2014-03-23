@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CategoryActivity"
+            android:name=".CategoryFragment"
             android:label="@string/category" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

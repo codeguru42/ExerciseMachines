@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBarActivity;
-import android.view.MenuItem;
 import android.view.View;
 import codeguru.machinelib.FragmentTabListener;
+import com.loopj.android.image.SmartImageView;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -17,6 +17,12 @@ public class MainActivity extends ActionBarActivity {
     public static final int SELECT_PICTURE = 1;
 
     private DetailsFragment mDetailsFragment;
+
+    private CategoryFragment mCategoryFragment;
+
+    private SmartImageView mThumbnail;
+
+    private int mLoaderId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,18 +34,23 @@ public class MainActivity extends ActionBarActivity {
 
         mDetailsFragment = new DetailsFragment();
         Tab detailsTab = actionBar.newTab();
-        detailsTab.setText(R.string.details);
+        detailsTab.setText(R.string.machine_title);
         detailsTab.setTabListener(new FragmentTabListener(mDetailsFragment,
                 R.id.frame));
         actionBar.addTab(detailsTab);
-    }
 
-    public void onAddCategory(MenuItem item) {
-        Intent intent = new Intent(this, CategoryActivity.class);
-        startActivity(intent);
+        mCategoryFragment = new CategoryFragment();
+        Tab categoryTab = actionBar.newTab();
+        categoryTab.setText(R.string.category_title);
+        categoryTab.setTabListener(new FragmentTabListener(mCategoryFragment,
+                R.id.frame));
+        actionBar.addTab(categoryTab);
+
+        mLoaderId = 0;
     }
 
     public void onGetImage(View view) {
+        mThumbnail = (SmartImageView) view;
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -52,11 +63,8 @@ public class MainActivity extends ActionBarActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
                 Uri imageUri = data.getData();
-                getLoaderManager().initLoader(
-                        ImageLoader.IMAGE_URL_LOADER,
-                        null,
-                        new ImageLoader(this, mDetailsFragment
-                                .getThumbnailView(), imageUri));
+                getLoaderManager().initLoader(mLoaderId++, null,
+                        new ImageLoader(this, mThumbnail, imageUri));
             }
         }
     }

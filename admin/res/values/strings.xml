@@ -16,5 +16,7 @@
     <string name="muscles_error">Enter muscles list.</string>
     <string name="machine_saved">Machine saved.</string>
     <string name="category_saved">Category saved.</string>
+    <string name="machine_title">Machine</string>
+    <string name="category_title">Category</string>
 
 </resources>
