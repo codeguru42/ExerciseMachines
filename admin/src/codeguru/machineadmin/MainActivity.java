@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import codeguru.machinelib.FragmentTabListener;
@@ -34,17 +32,6 @@ public class MainActivity extends ActionBarActivity {
         detailsTab.setTabListener(new FragmentTabListener(mDetailsFragment,
                 R.id.frame));
         actionBar.addTab(detailsTab);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    public void onSave(MenuItem item) {
-        mDetailsFragment.save();
     }
 
     public void onAddCategory(MenuItem item) {
