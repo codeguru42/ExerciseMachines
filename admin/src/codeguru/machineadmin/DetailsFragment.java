@@ -30,6 +30,8 @@ public class DetailsFragment extends Fragment {
 
     private SmartImageView mThumbnail;
 
+    private ParseQueryAdapter<ParseObject> mAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,16 +48,20 @@ public class DetailsFragment extends Fragment {
         mTipsText = (EditText) view.findViewById(R.id.tips);
         mThumbnail = (SmartImageView) view.findViewById(R.id.thumbnail);
 
-        Parse.initialize(getActivity(),
-                "6eINSAhUl3T55fMTGaOG7XdIj0KvORFN4b3PPADw",
-                "WQuU2hGwbuAapiJJuyEIpX2bg086liWCzpvFREZS");
+        Parse.initialize(getActivity(), MachineAdminApp.PARSE_APPLICATION_ID,
+                MachineAdminApp.PARSE_CLIENT_KEY);
 
-        ParseQueryAdapter<ParseObject> adapter = new ParseQueryAdapter<ParseObject>(
-                getActivity(), "Category");
-        adapter.setTextKey("name");
-        mCategorySpinner.setAdapter(adapter);
+        mAdapter = new ParseQueryAdapter<ParseObject>(getActivity(), "Category");
+        mAdapter.setTextKey("name");
+        mCategorySpinner.setAdapter(mAdapter);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mAdapter.loadObjects();
     }
 
     @Override
@@ -113,4 +119,5 @@ public class DetailsFragment extends Fragment {
                     Toast.LENGTH_LONG).show();
         }
     }
+
 }

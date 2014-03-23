@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.loopj.android.image.SmartImageView;
 import com.parse.Parse;
-import com.parse.ParseObject;
 
 public class CategoryActivity extends ActionBarActivity {
 
@@ -34,8 +33,8 @@ public class CategoryActivity extends ActionBarActivity {
 
         mThumbnail = (SmartImageView) findViewById(R.id.thumbnail);
 
-        Parse.initialize(this, "6eINSAhUl3T55fMTGaOG7XdIj0KvORFN4b3PPADw",
-                "WQuU2hGwbuAapiJJuyEIpX2bg086liWCzpvFREZS");
+        Parse.initialize(this, MachineAdminApp.PARSE_APPLICATION_ID,
+                MachineAdminApp.PARSE_CLIENT_KEY);
     }
 
     @Override
@@ -64,9 +63,9 @@ public class CategoryActivity extends ActionBarActivity {
 
         Log.d(TAG, "good=" + good);
         if (good) {
-            ParseObject category = new ParseObject("Category");
-            category.put("name", name);
-            category.put("muscles", muscles);
+            Category category = new Category();
+            category.setName(name);
+            category.setMuscles(muscles);
             category.saveInBackground();
 
             nameText.setText("");
