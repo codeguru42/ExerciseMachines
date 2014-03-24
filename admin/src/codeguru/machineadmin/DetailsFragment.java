@@ -11,9 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.loopj.android.image.SmartImageView;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQueryAdapter;
@@ -28,9 +28,11 @@ public class DetailsFragment extends Fragment {
 
     private EditText mTipsText;
 
-    private SmartImageView mThumbnail;
+    private ImageView mThumbnail;
 
     private ParseQueryAdapter<ParseObject> mAdapter;
+
+    private ImageLoadTarget mThumbnailTarget;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,10 @@ public class DetailsFragment extends Fragment {
         mNameText = (EditText) view.findViewById(R.id.name);
         mCategorySpinner = (Spinner) view.findViewById(R.id.category);
         mTipsText = (EditText) view.findViewById(R.id.tips);
-        mThumbnail = (SmartImageView) view.findViewById(R.id.thumbnail);
+        mThumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+        mThumbnailTarget = new ImageLoadTarget(mThumbnail);
+        mThumbnail.setOnClickListener(new ImageClickListener(
+                (MainActivity) getActivity(), mThumbnailTarget));
 
         mAdapter = new ParseQueryAdapter<ParseObject>(getActivity(), "Category");
         mAdapter.setTextKey("name");

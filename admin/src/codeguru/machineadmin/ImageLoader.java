@@ -9,7 +9,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import com.loopj.android.image.SmartImageView;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+import java.io.File;
 
 public class ImageLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -19,13 +21,13 @@ public class ImageLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private final Context mContext;
 
-    private final SmartImageView mImageView;
+    private final Target mTarget;
 
     private final Uri mImageUri;
 
-    public ImageLoader(Context context, SmartImageView imageView, Uri imageUri) {
+    public ImageLoader(Context context, Uri imageUri, Target target) {
         mContext = context;
-        mImageView = imageView;
+        mTarget = target;
         mImageUri = imageUri;
     }
 
@@ -53,7 +55,7 @@ public class ImageLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
         Log.d(TAG, imagePath);
 
-        mImageView.setImageUrl("file:///" + imagePath);
+        Picasso.with(mContext).load(new File(imagePath)).into(mTarget);
     }
 
     @Override

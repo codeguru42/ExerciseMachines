@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBarActivity;
-import android.view.View;
 import codeguru.machinelib.FragmentTabListener;
-import com.loopj.android.image.SmartImageView;
+import com.squareup.picasso.Target;
 
 public class MainActivity extends ActionBarActivity {
 
+    @SuppressWarnings("unused")
     private static final String TAG = MainActivity.class.getName();
 
     public static final int SELECT_PICTURE = 1;
@@ -20,7 +20,7 @@ public class MainActivity extends ActionBarActivity {
 
     private CategoryFragment mCategoryFragment;
 
-    private SmartImageView mThumbnail;
+    private Target mImageTarget;
 
     private int mLoaderId;
 
@@ -49,8 +49,8 @@ public class MainActivity extends ActionBarActivity {
         mLoaderId = 0;
     }
 
-    public void onGetImage(View view) {
-        mThumbnail = (SmartImageView) view;
+    public void onGetImage(Target target) {
+        mImageTarget = target;
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity {
             if (requestCode == SELECT_PICTURE) {
                 Uri imageUri = data.getData();
                 getLoaderManager().initLoader(mLoaderId++, null,
-                        new ImageLoader(this, mThumbnail, imageUri));
+                        new ImageLoader(this, imageUri, mImageTarget));
             }
         }
     }

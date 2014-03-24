@@ -43,14 +43,13 @@
             android:layout_height="wrap_content"
             android:text="@string/thumbnail" />
 
-        <com.loopj.android.image.SmartImageView
+        <ImageView
             android:id="@+id/thumbnail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:contentDescription="@string/select_thumbnail"
-            android:onClick="onGetImage"
             android:src="@drawable/tap_here" />
     </LinearLayout>
 

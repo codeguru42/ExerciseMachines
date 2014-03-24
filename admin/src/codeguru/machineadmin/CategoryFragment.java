@@ -11,21 +11,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
-import com.loopj.android.image.SmartImageView;
 import com.parse.Parse;
+import com.squareup.picasso.Target;
 
 public class CategoryFragment extends Fragment {
 
     private static final String TAG = CategoryFragment.class.getName();
 
-    private static final int SELECT_PICTURE = 1;
-
-    private SmartImageView mThumbnail;
+    private ImageView mThumbnail;
 
     private EditText mMusclesText;
 
     private EditText mNameText;
+
+    private Target mThumbnailTarget;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,10 @@ public class CategoryFragment extends Fragment {
 
         mNameText = (EditText) view.findViewById(R.id.name);
         mMusclesText = (EditText) view.findViewById(R.id.muscles);
-        mThumbnail = (SmartImageView) view.findViewById(R.id.thumbnail);
+        mThumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+        mThumbnailTarget = new ImageLoadTarget(mThumbnail);
+        mThumbnail.setOnClickListener(new ImageClickListener(
+                (MainActivity) getActivity(), mThumbnailTarget));
 
         return view;
     }
